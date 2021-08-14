@@ -1,0 +1,15 @@
+.active {
+    opacity: 1 !important;
+}
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #1f1f1f;
+}
