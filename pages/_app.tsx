@@ -1,10 +1,14 @@
 import { Center } from '@chakra-ui/layout'
 import { ChakraProvider } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
+import { useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import '../styles/styles.css'
 
 function MyApp({ Component, pageProps }: AppProps) {
+    useEffect(() => {
+        window.history.scrollRestoration = 'manual'
+    }, [])
     return (
         <ChakraProvider>
             <Center

@@ -1,7 +1,7 @@
 import { Img } from '@chakra-ui/image'
 import { Box, Center, Grid, GridItem, Heading } from '@chakra-ui/layout'
 import axios from 'axios'
-import { excludeList } from 'constants/ExcludeList'
+import { excludeList } from 'constants/RepoExcludeList'
 import { GithubRepoTypes } from 'global'
 import { useEffect, useState } from 'react'
 
@@ -49,7 +49,7 @@ const Projects = () => {
                                         rounded='15px'
                                         objectFit='contain'
                                         src={`/img/repo-img/${repo.name}.png` as any}
-                                        alt=''
+                                        alt={repo.name}
                                     />
                                 </GridItem>
                             )
