@@ -15,7 +15,6 @@ const Projects = () => {
         filteredData.sort((a, b) => {
             return Number(new Date(b.created_at)) - Number(new Date(a.created_at))
         })
-        filteredData.forEach(a => console.log(a.name))
         setRepos(filteredData)
     }
 
