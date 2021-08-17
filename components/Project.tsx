@@ -1,6 +1,5 @@
 import { Center, CenterProps, GridItem, Link } from '@chakra-ui/layout'
-import { HTMLMotionProps, motion, useAnimation } from 'framer-motion'
-import { useEffect } from 'react'
+import { HTMLMotionProps, motion } from 'framer-motion'
 import { ChakraNextImage } from './ChakraNextImage'
 
 type MergeCenter<P, T> = Omit<P, keyof T> & T
@@ -8,14 +7,11 @@ type MotionCenterProps = MergeCenter<CenterProps, HTMLMotionProps<'div'>>
 export const MotionCenter: React.FC<MotionCenterProps> = motion(Center)
 
 type ProjectTypes = {
-    inView: boolean
     homepage: string
     name: string
 }
 
-const Project = ({ inView, homepage, name }: ProjectTypes) => {
-    
-
+const Project = ({ homepage, name }: ProjectTypes) => {
     return (
         <MotionCenter position='relative' whileHover={{ y: -20 }}>
             <Link href={homepage} target='_blank' _focus={{ boxShadow: 'none' }}>

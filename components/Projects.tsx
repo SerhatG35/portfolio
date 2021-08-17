@@ -21,7 +21,7 @@ const variants = {
         opacity: 1,
         y: 0,
         transition: {
-            duration: 1,
+            duration: 0.75,
         },
     },
 }
@@ -33,7 +33,12 @@ const Projects = () => {
 
     const getRepositories = async () => {
         const { data } = await axios.get<GithubRepoTypes>(
-            'https://api.github.com/users/SerhatG35/repos'
+            'https://api.github.com/users/SerhatG35/repos',
+            {
+                headers: {
+                    Authorization: process.env.ACCESS_TOKEN,
+                },
+            }
         )
         const filteredData = data.filter(a => !excludeList.includes(a.name))
         filteredData.sort((a, b) => {
@@ -72,12 +77,7 @@ const Projects = () => {
                     >
                         {repos?.map(repo => {
                             return (
-                                <Project
-                                    key={repo.id}
-                                    inView={inView}
-                                    homepage={repo.homepage}
-                                    name={repo.name}
-                                />
+                                <Project key={repo.id} homepage={repo.homepage} name={repo.name} />
                             )
                         })}
                     </MotionGrid>
