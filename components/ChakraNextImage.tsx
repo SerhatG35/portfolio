@@ -1,4 +1,4 @@
-import { Box, BoxProps } from '@chakra-ui/react'
+import { Center, CenterProps } from '@chakra-ui/react'
 import Image from 'next/image'
 
 type ChakraNextImageProps = {
@@ -6,8 +6,9 @@ type ChakraNextImageProps = {
     alt: string
     loadingType: 'eager' | 'lazy'
     nextWidth: string
-    nextHeight: string
-} & Omit<BoxProps, 'as'>
+    nextHeight: string,
+    objectFit: 'cover' | 'fill' | 'contain'
+} & Omit<CenterProps, 'as'>
 
 export const ChakraNextImage = ({
     src,
@@ -15,26 +16,19 @@ export const ChakraNextImage = ({
     loadingType = 'lazy',
     nextWidth,
     nextHeight,
+    objectFit,
     ...rest
 }: ChakraNextImageProps) => {
     return (
-        <Box
-            position='relative'
-            {...rest}
-            rounded='15px'
-            w={nextWidth}
-            h={nextHeight}
-            overflow='hidden'
-            bg='red'
-        >
+        <Center position='relative' {...rest}>
             <Image
-                objectFit='cover'
+                objectFit={objectFit}
                 src={src}
                 alt={alt}
                 loading={loadingType}
                 width={nextWidth}
                 height={nextHeight}
             />
-        </Box>
+        </Center>
     )
 }

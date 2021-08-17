@@ -1,12 +1,36 @@
-import { Img } from '@chakra-ui/image'
-import { Box, Center, Grid, GridItem, Heading } from '@chakra-ui/layout'
+import { Box, Center, CenterProps, Grid, GridProps, Heading } from '@chakra-ui/layout'
 import axios from 'axios'
 import { excludeList } from 'constants/RepoExcludeList'
+import { HTMLMotionProps, motion, useAnimation } from 'framer-motion'
 import { GithubRepoTypes } from 'global'
 import { useEffect, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
+import Project from './Project'
+
+type MergeCenter<P, T> = Omit<P, keyof T> & T
+type MotionCenterProps = MergeCenter<CenterProps, HTMLMotionProps<'div'>>
+export const MotionCenter: React.FC<MotionCenterProps> = motion(Center)
+
+type MergeGrid<P, T> = Omit<P, keyof T> & T
+type MotionGridProps = MergeGrid<GridProps, HTMLMotionProps<'div'>>
+export const MotionGrid: React.FC<MotionGridProps> = motion(Grid)
+
+const variants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            duration: 1,
+        },
+    },
+}
 
 const Projects = () => {
     const [repos, setRepos] = useState<GithubRepoTypes | undefined>(undefined)
+    const controls = useAnimation()
+    const [ref, inView] = useInView({ rootMargin: '-50%', triggerOnce: true })
+
     const getRepositories = async () => {
         const { data } = await axios.get<GithubRepoTypes>(
             'https://api.github.com/users/SerhatG35/repos'
@@ -22,38 +46,41 @@ const Projects = () => {
         getRepositories()
     }, [])
 
+    useEffect(() => {
+        if (inView) {
+            controls.start('visible')
+        }
+        if (!inView) {
+            controls.start('hidden')
+        }
+    }, [controls, inView])
+
     return (
-        <Box as='section' id='projects' w='100%' py='5em'>
+        <Box as='section' id='projects' w='100%' py='5em' ref={ref}>
             <Box h='100%' w='90%' margin='0 auto' maxW='1200px'>
                 <Center w='100%' h='100%' flexDir='column'>
                     <Heading fontFamily='Nunito' mb='2em'>
                         Projects
                     </Heading>
-                    <Grid
+                    <MotionGrid
                         h='100%'
                         templateColumns={['repeat(1,1fr)', 'repeat(1,1fr)', 'repeat(2, 1fr)']}
                         gap={8}
+                        initial='hidden'
+                        animate={controls}
+                        variants={variants}
                     >
                         {repos?.map(repo => {
                             return (
-                                <GridItem
+                                <Project
                                     key={repo.id}
-                                    rounded='15px'
-                                    position='relative'
-                                    boxShadow='0 2px 8px #DBDBDB'
-                                    border='1px solid #DBDBDB'
-                                >
-                                    <Img
-                                        loading='lazy'
-                                        rounded='15px'
-                                        objectFit='contain'
-                                        src={`/img/repo-img/${repo.name}.png` as any}
-                                        alt={repo.name}
-                                    />
-                                </GridItem>
+                                    inView={inView}
+                                    homepage={repo.homepage}
+                                    name={repo.name}
+                                />
                             )
                         })}
-                    </Grid>
+                    </MotionGrid>
                 </Center>
             </Box>
         </Box>

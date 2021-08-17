@@ -27,13 +27,14 @@ const Landing = () => {
                     transition={{ delay: 0.4, duration: 0.5 }}
                 >
                     <ChakraNextImage
-                        // w={['100%']}
-                        // h='400px'
+                        objectFit={'cover'}
                         src={'/img/serhat.jpg'}
                         alt='Profile Photo'
                         loadingType='eager'
                         nextWidth='400px'
                         nextHeight='400px'
+                        rounded='15px'
+                        overflow='hidden'
                     />
                 </MotionCenter>
                 <MotionHeading
