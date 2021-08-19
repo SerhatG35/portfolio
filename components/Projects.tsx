@@ -33,12 +33,7 @@ const Projects = () => {
 
     const getRepositories = async () => {
         const { data } = await axios.get<GithubRepoTypes>(
-            'https://api.github.com/users/SerhatG35/repos',
-            {
-                headers: {
-                    Authorization: process.env.ACCESS_TOKEN,
-                },
-            }
+            'https://api.github.com/users/SerhatG35/repos'
         )
         const filteredData = data.filter(a => !excludeList.includes(a.name))
         filteredData.sort((a, b) => {
