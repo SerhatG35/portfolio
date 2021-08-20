@@ -72,7 +72,7 @@ const Contact = () => {
                             <div
                                 id='recaptcha'
                                 className='g-recaptcha'
-                                data-sitekey={process.env.RECAPTCHA_SECRET_KEY}
+                                data-sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY}
                             ></div>
                             <FormControl
                                 isInvalid={!!formState.errors?.subject?.message}
