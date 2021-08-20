@@ -69,6 +69,11 @@ const Contact = () => {
                             id='contact-form'
                             onSubmit={handleSubmit(sendEmail)}
                         >
+                            <div
+                                id='recaptcha'
+                                className='g-recaptcha'
+                                data-sitekey={process.env.RECAPTCHA_SECRET_KEY}
+                            ></div>
                             <FormControl
                                 isInvalid={!!formState.errors?.subject?.message}
                                 errortext={formState.errors?.subject?.message}
