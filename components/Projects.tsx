@@ -32,14 +32,18 @@ const Projects = () => {
     const [ref, inView] = useInView({ rootMargin: '-50%', triggerOnce: true })
 
     const getRepositories = async () => {
-        const { data } = await axios.get<GithubRepoTypes>(
-            'https://api.github.com/users/SerhatG35/repos'
-        )
-        const filteredData = data.filter(a => !excludeList.includes(a.name))
-        filteredData.sort((a, b) => {
-            return Number(new Date(b.created_at)) - Number(new Date(a.created_at))
-        })
-        setRepos(filteredData)
+        try {
+            const { data } = await axios.get<GithubRepoTypes>(
+                'https://api.github.com/users/SerhatG35/repos'
+            )
+            const filteredData = data.filter(a => !excludeList.includes(a.name))
+            filteredData.sort((a, b) => {
+                return Number(new Date(b.created_at)) - Number(new Date(a.created_at))
+            })
+            setRepos(filteredData)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     useEffect(() => {

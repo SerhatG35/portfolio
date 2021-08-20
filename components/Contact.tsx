@@ -6,42 +6,43 @@ import { Textarea } from '@chakra-ui/textarea'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ContactSchema } from 'constants/YupSchema'
 import { sendForm } from 'emailjs-com'
-import { FormEvent } from 'react'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { AiOutlineGithub } from 'react-icons/ai'
 import { FaLinkedin } from 'react-icons/fa'
 import { FiInstagram } from 'react-icons/fi'
+import { toaster } from 'utils/Toaster'
 
 type ContactInputTypes = {
-    email: string
+    subject: string
     name: string
+    email: string
     message: string
 }
 
 const Contact = () => {
-    const {
-        formState: { errors },
-        handleSubmit,
-        register,
-    } = useForm<ContactInputTypes>({
+    const { formState, handleSubmit, register, reset } = useForm<ContactInputTypes>({
         resolver: yupResolver(ContactSchema),
     })
 
-    const sendEmail = (e: FormEvent<HTMLFormElement>) => {
+    const sendEmail = () => {
         sendForm(
             'service_pjtiisg',
             'template_04nqstq',
             '#contact-form',
             'user_EYPXtlwIrekVAS0q2FIMR'
-        ).then(
-            (result: any) => {
-                console.log(result.text)
-            },
-            error => {
-                console.log(error.text)
-            }
         )
+            .then(() => {
+                toaster('Success', 'Email has been sent', 'success')
+            })
+            .catch(() => {
+                toaster('Error', 'There was a problem please try later', 'error')
+            })
     }
+
+    useEffect(() => {
+        if (formState.isSubmitSuccessful) reset()
+    }, [formState, reset])
 
     return (
         <Box as='section' id='contact' h='100vh' w='100%' pt='5em'>
@@ -69,54 +70,87 @@ const Contact = () => {
                             onSubmit={handleSubmit(sendEmail)}
                         >
                             <FormControl
-                                isInvalid={!!errors.email?.message}
-                                errortext={errors?.email?.message}
+                                isInvalid={!!formState.errors?.subject?.message}
+                                errortext={formState.errors?.subject?.message}
                                 isRequired
+                                id='subject'
                             >
-                                <FormLabel>Email</FormLabel>
-                                <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+                                <FormLabel>Subject</FormLabel>
+                                <FormErrorMessage>
+                                    {formState.errors.subject?.message}
+                                </FormErrorMessage>
                                 <Input
                                     _focus={{ boxShadow: '0 0 1px 1px #1f1f1f' }}
-                                    type='email'
-                                    rounded='xl'
+                                    rounded='md'
                                     borderColor='#CCCCCC'
-                                    {...register('email')}
+                                    {...register('subject')}
+                                    type='text'
                                 />
                             </FormControl>
                             <FormControl
-                                isInvalid={!!errors?.name?.message}
-                                errortext={errors?.name?.message}
+                                isInvalid={!!formState.errors?.name?.message}
+                                errortext={formState.errors?.name?.message}
                                 isRequired
+                                id='name'
                             >
                                 <FormLabel>Name</FormLabel>
-                                <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
+                                <FormErrorMessage>
+                                    {formState.errors.name?.message}
+                                </FormErrorMessage>
                                 <Input
                                     _focus={{ boxShadow: '0 0 1px 1px #1f1f1f' }}
-                                    type='name'
-                                    rounded='xl'
+                                    rounded='md'
                                     borderColor='#CCCCCC'
                                     {...register('name')}
+                                    type='text'
                                 />
                             </FormControl>
                             <FormControl
-                                isInvalid={!!errors?.message?.message}
-                                errortext={errors?.message?.message}
+                                isInvalid={!!formState.errors?.email?.message}
+                                errortext={formState.errors?.email?.message}
                                 isRequired
+                                id='email'
+                            >
+                                <FormLabel>Email</FormLabel>
+                                <FormErrorMessage>
+                                    {formState.errors.email?.message}
+                                </FormErrorMessage>
+                                <Input
+                                    _focus={{ boxShadow: '0 0 1px 1px #1f1f1f' }}
+                                    rounded='md'
+                                    borderColor='#CCCCCC'
+                                    {...register('email')}
+                                    type='email'
+                                />
+                            </FormControl>
+
+                            <FormControl
+                                isInvalid={!!formState.errors?.message?.message}
+                                errortext={formState.errors?.message?.message}
+                                isRequired
+                                id='message'
                             >
                                 <FormLabel>Message</FormLabel>
-                                <FormErrorMessage>{errors.message?.message}</FormErrorMessage>
+                                <FormErrorMessage>
+                                    {formState.errors.message?.message}
+                                </FormErrorMessage>
                                 <Textarea
-                                    type='message'
-                                    rounded='xl'
+                                    rounded='md'
                                     placeholder='Your message..'
                                     resize='none'
                                     _focus={{ boxShadow: '0 0 1px 1px #1f1f1f' }}
-                                    height='150px'
+                                    height={['75px', '150px', '150px']}
                                     borderColor='#CCCCCC'
                                     {...register('message')}
+                                    type='text'
                                 />
                             </FormControl>
-                            <Button type='submit' mt='2em' border='1px solid #1f1f1f'>
+                            <Button
+                                _focus={{ boxShadow: 'none' }}
+                                type='submit'
+                                mt='2em'
+                                border='1px solid #1f1f1f'
+                            >
                                 Send
                             </Button>
                         </Center>
