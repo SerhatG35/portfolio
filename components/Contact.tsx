@@ -20,6 +20,7 @@ type ContactInputTypes = {
 }
 
 const Contact = () => {
+    console.log(process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY)
     const [formSubmitted, setFormSubmitted] = useState(false)
     const [captchaFilled, setCaptchaFilled] = useState(false)
     const { formState, handleSubmit, register, reset } = useForm<ContactInputTypes>({
