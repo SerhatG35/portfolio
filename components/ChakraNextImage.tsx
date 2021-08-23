@@ -6,8 +6,9 @@ type ChakraNextImageProps = {
     alt: string
     loadingType: 'eager' | 'lazy'
     nextWidth: string
-    nextHeight: string,
-    objectFit: 'cover' | 'fill' | 'contain'
+    nextHeight: string
+    objectFit: 'cover' | 'fill' | 'contain',
+    boxShadow?: string
 } & Omit<CenterProps, 'as'>
 
 export const ChakraNextImage = ({
@@ -17,10 +18,11 @@ export const ChakraNextImage = ({
     nextWidth,
     nextHeight,
     objectFit,
+    boxShadow = 'none',
     ...rest
 }: ChakraNextImageProps) => {
     return (
-        <Center position='relative' {...rest}>
+        <Center boxShadow={boxShadow} position='relative' {...rest}>
             <Image
                 objectFit={objectFit}
                 src={src}

@@ -15,13 +15,10 @@ type MergeGrid<P, T> = Omit<P, keyof T> & T
 type MotionGridProps = MergeGrid<GridProps, HTMLMotionProps<'div'>>
 export const MotionGrid: React.FC<MotionGridProps> = motion(Grid)
 
-const variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-        opacity: 1,
-        y: 0,
+const container = {
+    show: {
         transition: {
-            duration: 0.75,
+            staggerChildren: 0.15,
         },
     },
 }
@@ -29,7 +26,7 @@ const variants = {
 const Projects = () => {
     const [repos, setRepos] = useState<GithubRepoTypes | undefined>(undefined)
     const controls = useAnimation()
-    const [ref, inView] = useInView({ rootMargin: '-50%', triggerOnce: true })
+    const [ref, inView] = useInView({ threshold: 0.3, triggerOnce: true })
 
     const getRepositories = async () => {
         try {
@@ -52,7 +49,7 @@ const Projects = () => {
 
     useEffect(() => {
         if (inView) {
-            controls.start('visible')
+            controls.start('show')
         }
         if (!inView) {
             controls.start('hidden')
@@ -60,10 +57,10 @@ const Projects = () => {
     }, [controls, inView])
 
     return (
-        <Box as='section' id='projects' w='100%' py='5em' ref={ref}>
+        <Box as='section' aria-label='projects' id='projects' w='100%' py={['2.5em', '5em', '5em']} ref={ref}>
             <Box h='100%' w='90%' margin='0 auto' maxW='1200px'>
                 <Center w='100%' h='100%' flexDir='column'>
-                    <Heading fontFamily='Nunito' mb='2em'>
+                    <Heading fontFamily='Nunito' mb='1em'>
                         Projects
                     </Heading>
                     <MotionGrid
@@ -72,7 +69,7 @@ const Projects = () => {
                         gap={8}
                         initial='hidden'
                         animate={controls}
-                        variants={variants}
+                        variants={container}
                     >
                         {repos?.map(repo => {
                             return (

@@ -1,10 +1,15 @@
+import { Button, ButtonProps } from '@chakra-ui/button'
 import { Box, Center, Text, TextProps } from '@chakra-ui/layout'
 import { HTMLMotionProps, motion } from 'framer-motion'
 import { Link as ReactScroll } from 'react-scroll'
 
-type Merge<P, T> = Omit<P, keyof T> & T
-type MotionTextProps = Merge<TextProps, HTMLMotionProps<'p'>>
+type MergeText<P, T> = Omit<P, keyof T> & T
+type MotionTextProps = MergeText<TextProps, HTMLMotionProps<'p'>>
 export const MotionText: React.FC<MotionTextProps> = motion(Text)
+
+type MergeButton<P, T> = Omit<P, keyof T> & T
+type MotionButtonProps = MergeButton<ButtonProps, HTMLMotionProps<'button'>>
+export const MotionButton: React.FC<MotionButtonProps> = motion(Button)
 
 const Navbar = () => {
     return (
@@ -25,19 +30,19 @@ const Navbar = () => {
                 <Center w='100%' justifyContent='space-between'>
                     <ReactScroll
                         style={{ cursor: 'pointer', margin: '0.2em 1em', opacity: 0.6 }}
-                        to='landing'
+                        to='home'
                         spy={true}
                         smooth={true}
                         duration={500}
                     >
                         <MotionText
-                            whileHover={{ color: '#F2542C', transition: { duration: 0.2 } }}
                             initial={{ y: -50, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.25 }}
-                            fontSize='2xl'
-                            bgGradient='linear(to-l, #2C88F2,#F2542C)'
+                            fontSize={['sm', 'xl', '2xl', '2xl']}
+                            bgGradient='linear(to-l, #542CF2,#F2542C)'
                             bgClip='text'
+                            aria-label='scroll to home section'
                         >
                             Serhat Genç
                         </MotionText>
@@ -51,11 +56,11 @@ const Navbar = () => {
                             duration={500}
                         >
                             <MotionText
-                                whileHover={{ color: '#F2542C', transition: { duration: 0.2 } }}
                                 initial={{ y: -50, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.5 }}
-                                fontSize='2xl'
+                                fontSize={['sm', 'xl', '2xl', '2xl']}
+                                aria-label='scroll to projects section'
                             >
                                 Projects
                             </MotionText>
@@ -68,11 +73,11 @@ const Navbar = () => {
                             duration={500}
                         >
                             <MotionText
-                                whileHover={{ color: '#F2542C', transition: { duration: 0.2 } }}
                                 initial={{ y: -50, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.75 }}
-                                fontSize='2xl'
+                                fontSize={['sm', 'xl', '2xl', '2xl']}
+                                aria-label='scroll to contact section'
                             >
                                 Contact
                             </MotionText>
