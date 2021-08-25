@@ -1,19 +1,12 @@
-import { Box, Center, CenterProps, Grid, GridProps, Heading } from '@chakra-ui/layout'
+import { Box, Center, Heading } from '@chakra-ui/layout'
 import axios from 'axios'
 import { excludeList } from 'constants/RepoExcludeList'
-import { HTMLMotionProps, motion, useAnimation } from 'framer-motion'
+import { useAnimation } from 'framer-motion'
 import { GithubRepoTypes } from 'global'
 import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
+import { MotionGrid } from './MotionComponents'
 import Project from './Project'
-
-type MergeCenter<P, T> = Omit<P, keyof T> & T
-type MotionCenterProps = MergeCenter<CenterProps, HTMLMotionProps<'div'>>
-export const MotionCenter: React.FC<MotionCenterProps> = motion(Center)
-
-type MergeGrid<P, T> = Omit<P, keyof T> & T
-type MotionGridProps = MergeGrid<GridProps, HTMLMotionProps<'div'>>
-export const MotionGrid: React.FC<MotionGridProps> = motion(Grid)
 
 const container = {
     show: {
@@ -57,7 +50,14 @@ const Projects = () => {
     }, [controls, inView])
 
     return (
-        <Box as='section' aria-label='projects' id='projects' w='100%' py={['2.5em', '5em', '5em']} ref={ref}>
+        <Box
+            as='section'
+            aria-label='projects'
+            id='projects'
+            w='100%'
+            py={['2.5em', '5em', '5em']}
+            ref={ref}
+        >
             <Box h='100%' w='90%' margin='0 auto' maxW='1200px'>
                 <Center w='100%' h='100%' flexDir='column'>
                     <Heading fontFamily='Nunito' mb='1em'>

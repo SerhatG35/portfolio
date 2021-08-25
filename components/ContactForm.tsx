@@ -7,7 +7,7 @@ import { Textarea } from '@chakra-ui/textarea'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ContactSchema } from 'constants/YupSchema'
 import { sendForm } from 'emailjs-com'
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 import { toaster } from 'utils/Toaster'
@@ -26,7 +26,7 @@ const ContactForm = ({
 }) => {
     const inputSize = useBreakpointValue({ base: 'xs', sm: 'md' })
     const [captchaFilled, setCaptchaFilled] = useState(false)
-    const { formState, handleSubmit, register, reset } = useForm<ContactInputTypes>({
+    const { formState, handleSubmit, register } = useForm<ContactInputTypes>({
         resolver: yupResolver(ContactSchema),
     })
 
@@ -48,11 +48,8 @@ const ContactForm = ({
         } else toaster('Failed', 'Please complete reCAPTCHA', 'error')
     }
 
-    useEffect(() => {
-        if (formState.isSubmitSuccessful) reset()
-    }, [formState, reset])
-
     const completeReCaptcha = () => setCaptchaFilled(true)
+
     return (
         <Center
             w='100%'

@@ -1,10 +1,6 @@
-import { Center, CenterProps, GridItem, Link } from '@chakra-ui/layout'
-import { HTMLMotionProps, motion } from 'framer-motion'
+import { GridItem, Link } from '@chakra-ui/layout'
 import { ChakraNextImage } from './ChakraNextImage'
-
-type MergeCenter<P, T> = Omit<P, keyof T> & T
-type MotionCenterProps = MergeCenter<CenterProps, HTMLMotionProps<'div'>>
-export const MotionCenter: React.FC<MotionCenterProps> = motion(Center)
+import { MotionCenter } from './MotionComponents'
 
 type ProjectTypes = {
     homepage: string

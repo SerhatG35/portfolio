@@ -1,15 +1,6 @@
-import { Button, ButtonProps } from '@chakra-ui/button'
-import { Box, Center, Text, TextProps } from '@chakra-ui/layout'
-import { HTMLMotionProps, motion } from 'framer-motion'
+import { Box, Center } from '@chakra-ui/layout'
 import { Link as ReactScroll } from 'react-scroll'
-
-type MergeText<P, T> = Omit<P, keyof T> & T
-type MotionTextProps = MergeText<TextProps, HTMLMotionProps<'p'>>
-export const MotionText: React.FC<MotionTextProps> = motion(Text)
-
-type MergeButton<P, T> = Omit<P, keyof T> & T
-type MotionButtonProps = MergeButton<ButtonProps, HTMLMotionProps<'button'>>
-export const MotionButton: React.FC<MotionButtonProps> = motion(Button)
+import { MotionText } from './MotionComponents'
 
 const Navbar = () => {
     return (

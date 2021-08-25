@@ -1,22 +1,9 @@
-import { IconButton, IconButtonProps } from '@chakra-ui/button'
-import { Box, Center, CenterProps, Heading, HeadingProps } from '@chakra-ui/layout'
-import { HTMLMotionProps, motion } from 'framer-motion'
+import { Box, Center } from '@chakra-ui/layout'
 import { useState } from 'react'
-import { IoArrowDownCircle } from 'react-icons/io5'
+import { BiDownArrow } from 'react-icons/bi'
 import { Link } from 'react-scroll'
 import { ChakraNextImage } from './ChakraNextImage'
-
-type MergeCenter<P, T> = Omit<P, keyof T> & T
-type MotionCenterProps = MergeCenter<CenterProps, HTMLMotionProps<'div'>>
-export const MotionCenter: React.FC<MotionCenterProps> = motion(Center)
-
-type MergeHeading<P, T> = Omit<P, keyof T> & T
-type MotionHeadingProps = MergeHeading<HeadingProps, HTMLMotionProps<'h2'>>
-export const MotionHeading: React.FC<MotionHeadingProps> = motion(Heading)
-
-type MergeIconButton<P, T> = Omit<P, keyof T> & T
-type MotionIconButtonProps = MergeIconButton<IconButtonProps, HTMLMotionProps<'button'>>
-export const MotionIconButton: React.FC<MotionIconButtonProps> = motion(IconButton)
+import { MotionCenter, MotionHeading, MotionIconButton } from './MotionComponents'
 
 const Landing = () => {
     const [isDisabled, setIsDisabled] = useState(false)
@@ -28,7 +15,7 @@ const Landing = () => {
             id='home'
             h='100vh'
             w='100%'
-            py='5em'
+            pt={['2.5em', '5em', '5em']}
             position='relative'
         >
             <Center
@@ -53,9 +40,9 @@ const Landing = () => {
                         loadingType='eager'
                         nextWidth='400px'
                         nextHeight='400px'
-                        rounded='20px'
+                        rounded='50%'
                         overflow='hidden'
-                        boxShadow='0 2px 20px 2px #dbdbdb'
+                        boxShadow='0 2px 12px #dbdbdb'
                     />
                 </MotionCenter>
                 <MotionHeading
@@ -80,7 +67,6 @@ const Landing = () => {
                 >
                     I&apos;m a passionate Front End Developer and React.js enthusiast.
                 </MotionHeading>
-
                 <MotionHeading
                     display={isDisabled ? 'none' : 'block'}
                     initial={{ y: 50, opacity: 0 }}
@@ -97,8 +83,7 @@ const Landing = () => {
                     style={{
                         cursor: 'pointer',
                         display: isDisabled ? 'none' : 'flex',
-                        position: 'absolute',
-                        bottom: 1,
+                        marginTop: '1em',
                     }}
                     to='projects'
                     spy={true}
@@ -107,7 +92,7 @@ const Landing = () => {
                     onClick={() => setIsDisabled(true)}
                 >
                     <MotionIconButton
-                        animate={{ y: -40 }}
+                        animate={{ y: -20 }}
                         transition={{
                             delay: 0.8,
                             repeat: Infinity,
@@ -118,7 +103,7 @@ const Landing = () => {
                         _focus={{ boxShadow: 'none' }}
                         _active={{ background: 'transparent' }}
                         _hover={{ background: 'transparent' }}
-                        icon={<IoArrowDownCircle size={46} />}
+                        icon={<BiDownArrow size={28} />}
                     />
                 </Link>
             </Center>
