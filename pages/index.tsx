@@ -1,7 +1,7 @@
+import Contact from 'components/Contact'
+import Landing from 'components/Landing'
+import Projects from 'components/Projects'
 import Head from 'next/head'
-import Contact from '../components/Contact'
-import Landing from '../components/Home'
-import Projects from '../components/Projects'
 
 export default function Home() {
     return (

@@ -20,17 +20,18 @@ const Navbar = () => {
             <Box w='90%' margin='0 auto' maxW={['1200px']}>
                 <Center w='100%' justifyContent='space-between'>
                     <ReactScroll
-                        style={{ cursor: 'pointer', margin: '0.2em 1em', opacity: 0.6 }}
-                        to='home'
+                        style={{ cursor: 'pointer', opacity: 0.6 }}
+                        to='landing'
                         spy={true}
                         smooth={true}
                         duration={500}
                     >
                         <MotionText
+                            margin={['0.2em 0.3em', '0.2em 0.5em', '0.2em 1em', '0.2em 1em']}
                             initial={{ y: -50, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.25 }}
-                            fontSize={['sm', 'xl', '2xl', '2xl']}
+                            fontSize={['md', 'xl', '2xl', '2xl']}
                             bgGradient='linear(to-l, #542CF2,#F2542C)'
                             bgClip='text'
                             aria-label='scroll to home section'
@@ -40,34 +41,36 @@ const Navbar = () => {
                     </ReactScroll>
                     <Center>
                         <ReactScroll
-                            style={{ cursor: 'pointer', margin: '0.2em 1em', opacity: 0.6 }}
+                            style={{ cursor: 'pointer', opacity: 0.6 }}
                             to='projects'
                             spy={true}
                             smooth={true}
                             duration={500}
                         >
                             <MotionText
+                                margin={['0.2em 0.3em', '0.2em 0.5em', '0.2em 1em', '0.2em 1em']}
                                 initial={{ y: -50, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.5 }}
-                                fontSize={['sm', 'xl', '2xl', '2xl']}
+                                fontSize={['md', 'xl', '2xl', '2xl']}
                                 aria-label='scroll to projects section'
                             >
                                 Projects
                             </MotionText>
                         </ReactScroll>
                         <ReactScroll
-                            style={{ cursor: 'pointer', margin: '0.2em 1em', opacity: 0.6 }}
+                            style={{ cursor: 'pointer', opacity: 0.6 }}
                             to='contact'
                             spy={true}
                             smooth={true}
                             duration={500}
                         >
                             <MotionText
+                                margin={['0.2em 0.3em', '0.2em 0.5em', '0.2em 1em', '0.2em 1em']}
                                 initial={{ y: -50, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.75 }}
-                                fontSize={['sm', 'xl', '2xl', '2xl']}
+                                fontSize={['md', 'xl', '2xl', '2xl']}
                                 aria-label='scroll to contact section'
                             >
                                 Contact

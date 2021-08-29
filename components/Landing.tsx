@@ -11,11 +11,12 @@ const Landing = () => {
     return (
         <Box
             as='section'
-            aria-label='home'
-            id='home'
+            aria-label='landing'
+            id='landing'
             h='100vh'
             w='100%'
             pt={['2.5em', '5em', '5em']}
+            pb={['2.5em', '0', '0']}
             position='relative'
         >
             <Center
@@ -33,7 +34,7 @@ const Landing = () => {
                     rounded='20px'
                 >
                     <ChakraNextImage
-                        w={['75%', '100%', '100%']}
+                        w={['55%', '85%', '85%']}
                         objectFit={'cover'}
                         src={'/img/serhat.jpg'}
                         alt='Profile Photo'
