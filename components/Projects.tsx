@@ -41,12 +41,8 @@ const Projects = () => {
     }, [])
 
     useEffect(() => {
-        if (inView) {
-            controls.start('show')
-        }
-        if (!inView) {
-            controls.start('hidden')
-        }
+        if (inView) controls.start('show')
+        if (!inView) controls.start('hidden')
     }, [controls, inView])
 
     return (

@@ -137,6 +137,7 @@ const ContactForm = ({
                 onChange={completeReCaptcha}
             />
             <Button
+                aria-label='Send the contact form'
                 _focus={{ boxShadow: 'none' }}
                 _hover={{ background: '#2F2F2F' }}
                 _active={{ background: '#f5f5f5', color: '#1f1f1f' }}

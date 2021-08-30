@@ -1,10 +1,25 @@
 import { Box, Center, Heading, Text } from '@chakra-ui/layout'
-import { useState } from 'react'
+import { useAnimation } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { useInView } from 'react-intersection-observer'
 import ContactForm from './ContactForm'
 import Footer from './Footer'
+import { MotionCenter } from './MotionComponents'
+
+const variants = {
+    hidden: { y: 100, opacity: 0 },
+    show: { y: 0, opacity: 1, transition: { stiffness: 70, type: 'spring' } },
+}
 
 const Contact = () => {
     const [formSubmitted, setFormSubmitted] = useState(false)
+    const [ref, inView] = useInView({ threshold: 0.6, triggerOnce: true })
+    const controls = useAnimation()
+
+    useEffect(() => {
+        if (inView) controls.start('show')
+        if (!inView) controls.start('hidden')
+    }, [controls, inView])
 
     return (
         <Box
@@ -14,10 +29,14 @@ const Contact = () => {
             h='100vh'
             w='100%'
             pt={['2.5em', '5em', '5em']}
+            ref={ref}
         >
-            <Center
+            <MotionCenter
                 w='90%'
                 h={['88%', '85%', '85%']}
+                initial='hidden'
+                animate={controls}
+                variants={variants}
                 margin='0 auto'
                 maxW='1200px'
                 flexDir='column'
@@ -41,7 +60,7 @@ const Contact = () => {
                         )}
                     </Center>
                 </Center>
-            </Center>
+            </MotionCenter>
             <Footer />
         </Box>
     )

@@ -93,6 +93,7 @@ const Landing = () => {
                     onClick={() => setIsDisabled(true)}
                 >
                     <MotionIconButton
+                        aria-label='button to navigate projects section'
                         animate={{ y: -20 }}
                         transition={{
                             delay: 0.8,
