@@ -1,4 +1,5 @@
-import { GridItem, Link } from '@chakra-ui/layout'
+import { Center, GridItem, Link, Text } from '@chakra-ui/layout'
+import { GoLinkExternal } from 'react-icons/go'
 import { ChakraNextImage } from './ChakraNextImage'
 import { MotionCenter } from './MotionComponents'
 
@@ -22,13 +23,21 @@ const boxVariant = {
 
 const Project = ({ homepage, name }: ProjectTypes) => {
     return (
-        <MotionCenter position='relative' variants={boxVariant}>
-            <MotionCenter whileHover={{ y: -20 }}>
+        <MotionCenter position='relative' variants={boxVariant} flexDir='column'>
+            <MotionCenter
+                filter='grayscale(0.5)'
+                whileHover={{
+                    y: -20,
+                    transition: { type: 'tween', duration: 0.15 },
+                    filter: 'grayscale(0)',
+                }}
+                zIndex='1'
+            >
                 <Link href={homepage} target='_blank' _focus={{ boxShadow: 'none' }}>
                     <GridItem
                         rounded='15px'
                         position='relative'
-                        boxShadow='0 2px 8px  #DBDBDB'
+                        boxShadow='0 2px 8px #DBDBDB'
                         border='1px solid #DBDBDB'
                     >
                         <ChakraNextImage
@@ -44,6 +53,12 @@ const Project = ({ homepage, name }: ProjectTypes) => {
                     </GridItem>
                 </Link>
             </MotionCenter>
+            <Center fontSize='sm' fontWeight='700' color='blue.400' position='absolute' bottom='0'>
+                <Text mr='4px' textDecor='underline'>
+                    Live Demo
+                </Text>
+                <GoLinkExternal strokeWidth={0.7} />
+            </Center>
         </MotionCenter>
     )
 }

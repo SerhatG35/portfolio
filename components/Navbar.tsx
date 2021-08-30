@@ -27,11 +27,12 @@ const Navbar = () => {
                         duration={500}
                     >
                         <MotionText
-                            margin={['0.2em 0.3em', '0.2em 0.5em', '0.2em 1em', '0.2em 1em']}
+                            mx={['0.2em', '0.5em', '1em', '1em']}
+                            my={['0.2em']}
                             initial={{ y: -50, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.25 }}
-                            fontSize={['md', 'xl', '2xl', '2xl']}
+                            fontSize={['lg', 'xl', '2xl', '2xl']}
                             bgGradient='linear(to-l, #542CF2,#F2542C)'
                             bgClip='text'
                             aria-label='scroll to home section'
@@ -48,11 +49,12 @@ const Navbar = () => {
                             duration={500}
                         >
                             <MotionText
-                                margin={['0.2em 0.3em', '0.2em 0.5em', '0.2em 1em', '0.2em 1em']}
+                                mx={['0.2em', '0.5em', '1em', '1em']}
+                                my={['0.2em']}
                                 initial={{ y: -50, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.5 }}
-                                fontSize={['md', 'xl', '2xl', '2xl']}
+                                fontSize={['lg', 'xl', '2xl', '2xl']}
                                 aria-label='scroll to projects section'
                             >
                                 Projects
@@ -66,11 +68,12 @@ const Navbar = () => {
                             duration={500}
                         >
                             <MotionText
-                                margin={['0.2em 0.3em', '0.2em 0.5em', '0.2em 1em', '0.2em 1em']}
+                                mx={['0.2em', '0.5em', '1em', '1em']}
+                                my={['0.2em']}
                                 initial={{ y: -50, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
                                 transition={{ delay: 0.75 }}
-                                fontSize={['md', 'xl', '2xl', '2xl']}
+                                fontSize={['lg', 'xl', '2xl', '2xl']}
                                 aria-label='scroll to contact section'
                             >
                                 Contact

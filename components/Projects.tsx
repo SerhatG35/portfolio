@@ -51,30 +51,26 @@ const Projects = () => {
             aria-label='projects'
             id='projects'
             w='100%'
-            py={['2.5em', '5em', '5em']}
+            py={['3em', '5em', '5em']}
             ref={ref}
         >
-            <Box h='100%' w='90%' margin='0 auto' maxW='1200px'>
-                <Center w='100%' h='100%' flexDir='column'>
-                    <Heading fontFamily='Nunito' mb='1em'>
-                        Projects
-                    </Heading>
-                    <MotionGrid
-                        h='100%'
-                        templateColumns={['repeat(1,1fr)', 'repeat(1,1fr)', 'repeat(2, 1fr)']}
-                        gap={8}
-                        initial='hidden'
-                        animate={controls}
-                        variants={container}
-                    >
-                        {repos?.map(repo => {
-                            return (
-                                <Project key={repo.id} homepage={repo.homepage} name={repo.name} />
-                            )
-                        })}
-                    </MotionGrid>
-                </Center>
-            </Box>
+            <Center h='100%' w='90%' margin='0 auto' maxW='1200px' flexDir='column'>
+                <Heading fontFamily='Nunito' mb='1em'>
+                    Projects
+                </Heading>
+                <MotionGrid
+                    h='100%'
+                    templateColumns={['repeat(1,1fr)', 'repeat(1,1fr)', 'repeat(2, 1fr)']}
+                    gap={8}
+                    initial='hidden'
+                    animate={controls}
+                    variants={container}
+                >
+                    {repos?.map(repo => {
+                        return <Project key={repo.id} homepage={repo.homepage} name={repo.name} />
+                    })}
+                </MotionGrid>
+            </Center>
         </Box>
     )
 }

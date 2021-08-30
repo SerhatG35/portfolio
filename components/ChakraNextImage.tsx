@@ -7,7 +7,7 @@ type ChakraNextImageProps = {
     loadingType: 'eager' | 'lazy'
     nextWidth: string
     nextHeight: string
-    objectFit: 'cover' | 'fill' | 'contain',
+    objectFit: 'cover' | 'fill' | 'contain'
     boxShadow?: string
 } & Omit<CenterProps, 'as'>
 

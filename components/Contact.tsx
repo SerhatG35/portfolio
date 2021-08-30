@@ -28,7 +28,7 @@ const Contact = () => {
             id='contact'
             h='100vh'
             w='100%'
-            pt={['2.5em', '5em', '5em']}
+            pt={['3em', '5em', '5em']}
             ref={ref}
         >
             <MotionCenter
@@ -46,14 +46,19 @@ const Contact = () => {
                     Contact
                 </Heading>
                 <Center w='100%' h='100%' flexDir='column'>
-                    <Heading fontSize='xl' fontFamily='Nunito' mb={['0', '0.5em', '0.5em']}>
-                        Get In Touch
-                    </Heading>
                     <Center flexDir='column' w={['100%', '50%', '50%']} h='100%'>
+                        <Heading
+                            display={!formSubmitted ? 'block' : 'none'}
+                            fontSize='xl'
+                            fontFamily='Nunito'
+                            mb={['0', '0.5em', '0.5em']}
+                        >
+                            Get In Touch
+                        </Heading>
                         {!formSubmitted ? (
                             <ContactForm setFormSubmitted={setFormSubmitted} />
                         ) : (
-                            <Center alignSelf='center' flexDir='column'>
+                            <Center fontSize='xl' alignSelf='center' flexDir='column'>
                                 <Text>Your message has beeen sent.</Text>
                                 <Text>I will return to your email as soon as possible.</Text>
                             </Center>
