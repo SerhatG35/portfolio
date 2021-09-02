@@ -6,4 +6,5 @@ export const excludeList = [
     'react-typescript-webpack-template',
     'rick-and-morty-challenge',
     'snake-game',
+    'portfolio'
 ]

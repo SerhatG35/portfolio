@@ -1,4 +1,5 @@
 import { Center, GridItem, Link, Text } from '@chakra-ui/layout'
+import isTouchDevice from 'is-touch-device'
 import { GoLinkExternal } from 'react-icons/go'
 import { ChakraNextImage } from './ChakraNextImage'
 import { MotionCenter } from './MotionComponents'
@@ -22,10 +23,12 @@ const boxVariant = {
 }
 
 const Project = ({ homepage, name }: ProjectTypes) => {
+    const touchDevice = isTouchDevice()
+
     return (
         <MotionCenter position='relative' variants={boxVariant} flexDir='column'>
             <MotionCenter
-                filter='grayscale(0.5)'
+                filter={touchDevice ? 'none' : 'grayscale(0.5)'}
                 whileHover={{
                     y: -20,
                     transition: { type: 'tween', duration: 0.15 },
