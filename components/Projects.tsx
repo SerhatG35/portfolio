@@ -1,6 +1,6 @@
 import { Box, Center, Heading } from '@chakra-ui/layout'
 import axios from 'axios'
-import { excludeList } from 'constants/RepoExcludeList'
+import { repoList } from 'constants/RepoList'
 import { useAnimation } from 'framer-motion'
 import { GithubRepoTypes } from 'global'
 import { useEffect, useState } from 'react'
@@ -26,11 +26,10 @@ const Projects = () => {
             const { data } = await axios.get<GithubRepoTypes>(
                 'https://api.github.com/users/SerhatG35/repos'
             )
-            const filteredData = data.filter(a => !excludeList.includes(a.name))
-            filteredData.sort((a, b) => {
+            data.sort((a, b) => {
                 return Number(new Date(b.created_at)) - Number(new Date(a.created_at))
             })
-            setRepos(filteredData)
+            setRepos(data)
         } catch (error) {
             console.log(error)
         }
@@ -67,7 +66,10 @@ const Projects = () => {
                     variants={container}
                 >
                     {repos?.map(repo => {
-                        return <Project key={repo.id} homepage={repo.homepage} name={repo.name} />
+                        if (repoList.includes(repo.name))
+                            return (
+                                <Project key={repo.id} homepage={repo.homepage} name={repo.name} />
+                            )
                     })}
                 </MotionGrid>
             </Center>
