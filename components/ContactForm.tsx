@@ -138,9 +138,22 @@ const ContactForm = ({
             />
             <Button
                 aria-label='Send the contact form'
-                _focus={{ boxShadow: 'none' }}
-                _hover={{ background: '#2F2F2F' }}
-                _active={{ background: '#f5f5f5', color: '#1f1f1f' }}
+                _focus={{
+                    boxShadow: 'none',
+                }}
+                transition='background 0.8s'
+                backgroundPosition='center'
+                _hover={{
+                    bgColor: `#2f2f2f`,
+                    bgGradient: `radial(circle, transparent 1%, #2f2f2f 1%)`,
+                    bgPos: 'center',
+                    backgroundSize: '15000%',
+                }}
+                _active={{
+                    bgColor: `#3f3f3f`,
+                    backgroundSize: '100%',
+                    transition: 'background 0s',
+                }}
                 bg='#1f1f1f'
                 w='100%'
                 color='#f5f5f5'

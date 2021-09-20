@@ -94,13 +94,14 @@ const Landing = () => {
                 >
                     <MotionIconButton
                         aria-label='button to navigate projects section'
-                        animate={{ y: -20 }}
+                        animate={{ y: -20, opacity: 1 }}
                         transition={{
-                            delay: 0.8,
+                            delay: 1.6,
                             repeat: Infinity,
                             repeatType: 'reverse',
                             duration: 0.5,
                         }}
+                        initial={{ opacity: 0 }}
                         bg='transparent'
                         _focus={{ boxShadow: 'none' }}
                         _active={{ background: 'transparent' }}

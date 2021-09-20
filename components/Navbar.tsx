@@ -1,6 +1,28 @@
 import { Box, Center } from '@chakra-ui/layout'
 import { Link as ReactScroll } from 'react-scroll'
-import { MotionText } from './MotionComponents'
+import { MotionCenter, MotionText } from './MotionComponents'
+
+const container = {
+    show: {
+        transition: {
+            staggerChildren: 0.35,
+        },
+    },
+}
+
+const variants = {
+    hidden: {
+        opacity: 0,
+        y: -50,
+    },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: {
+            type: 'tween',
+        },
+    },
+}
 
 const Navbar = () => {
     return (
@@ -18,7 +40,13 @@ const Navbar = () => {
             fontWeight='700'
         >
             <Box w='90%' margin='0 auto' maxW={['1200px']}>
-                <Center w='100%' justifyContent='space-between'>
+                <MotionCenter
+                    initial='hidden'
+                    animate='show'
+                    variants={container}
+                    w='100%'
+                    justifyContent='space-between'
+                >
                     <ReactScroll
                         style={{ cursor: 'pointer', opacity: 0.6 }}
                         to='landing'
@@ -27,11 +55,9 @@ const Navbar = () => {
                         duration={500}
                     >
                         <MotionText
+                            variants={variants}
                             mx={['0.2em', '0.5em', '1em', '1em']}
                             my={['0.2em']}
-                            initial={{ y: -50, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ delay: 0.25 }}
                             fontSize={['lg', 'xl', '2xl', '2xl']}
                             bgGradient='linear(to-l, #542CF2,#F2542C)'
                             bgClip='text'
@@ -49,11 +75,9 @@ const Navbar = () => {
                             duration={500}
                         >
                             <MotionText
+                                variants={variants}
                                 mx={['0.2em', '0.5em', '1em', '1em']}
                                 my={['0.2em']}
-                                initial={{ y: -50, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.5 }}
                                 fontSize={['lg', 'xl', '2xl', '2xl']}
                                 aria-label='scroll to projects section'
                             >
@@ -68,11 +92,9 @@ const Navbar = () => {
                             duration={500}
                         >
                             <MotionText
+                                variants={variants}
                                 mx={['0.2em', '0.5em', '1em', '1em']}
                                 my={['0.2em']}
-                                initial={{ y: -50, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.75 }}
                                 fontSize={['lg', 'xl', '2xl', '2xl']}
                                 aria-label='scroll to contact section'
                             >
@@ -80,7 +102,7 @@ const Navbar = () => {
                             </MotionText>
                         </ReactScroll>
                     </Center>
-                </Center>
+                </MotionCenter>
             </Box>
         </Box>
     )
