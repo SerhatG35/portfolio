@@ -50,11 +50,11 @@ const Projects = () => {
             aria-label='projects'
             id='projects'
             w='100%'
-            py={['3em', '5em', '5em']}
+            py={['3em', '3.5em', '3.5em']}
             ref={ref}
         >
             <Center h='100%' w='90%' margin='0 auto' maxW='1200px' flexDir='column'>
-                <Heading fontFamily='Nunito' mb='1em'>
+                <Heading fontSize={['2xl', '4xl', '4xl']} fontFamily='Nunito' mb='1em'>
                     Projects
                 </Heading>
                 <MotionGrid

@@ -1,5 +1,5 @@
 import { Button } from '@chakra-ui/button'
-import { FormControl, FormErrorMessage, FormLabel } from '@chakra-ui/form-control'
+import { FormErrorMessage, FormLabel } from '@chakra-ui/form-control'
 import { Input } from '@chakra-ui/input'
 import { Center } from '@chakra-ui/layout'
 import { useBreakpointValue } from '@chakra-ui/media-query'
@@ -7,23 +7,31 @@ import { Textarea } from '@chakra-ui/textarea'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { ContactSchema } from 'constants/YupSchema'
 import { sendForm } from 'emailjs-com'
+import { AnimationControls } from 'framer-motion'
+import { ContactInputTypes } from 'global'
 import { Dispatch, SetStateAction, useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 import { toaster } from 'utils/Toaster'
+import { MotionCenter, MotionFormControl } from './MotionComponents'
 
-type ContactInputTypes = {
-    subject: string
-    name: string
-    email: string
-    message: string
+const child = {
+    hidden: {
+        opacity: 0,
+        x: -100,
+    },
+    show: {
+        opacity: 1,
+        x: 0,
+    },
 }
 
-const ContactForm = ({
-    setFormSubmitted,
-}: {
+type ContactFormTypes = {
     setFormSubmitted: Dispatch<SetStateAction<boolean>>
-}) => {
+    controls: AnimationControls
+}
+
+const ContactForm = ({ setFormSubmitted, controls }: ContactFormTypes) => {
     const inputSize = useBreakpointValue({ base: 'xs', sm: 'md' })
     const [captchaFilled, setCaptchaFilled] = useState(false)
     const { formState, handleSubmit, register } = useForm<ContactInputTypes>({
@@ -60,13 +68,16 @@ const ContactForm = ({
             id='contact-form'
             onSubmit={handleSubmit(sendEmail)}
         >
-            <FormControl
+            <MotionFormControl
+                variants={child}
                 isInvalid={!!formState.errors?.subject?.message}
-                errortext={formState.errors?.subject?.message}
                 isRequired
                 id='subject'
+                mb={['0.25em', '0.5em', '0.5em']}
             >
-                <FormLabel>Subject</FormLabel>
+                <FormLabel mb={['0','0.25em','0.25em']} fontSize={['sm', 'lg', 'lg']}>
+                    Subject
+                </FormLabel>
                 <FormErrorMessage>{formState.errors.subject?.message}</FormErrorMessage>
                 <Input
                     _focus={{ boxShadow: '0 0 1px 1px #1f1f1f' }}
@@ -76,14 +87,15 @@ const ContactForm = ({
                     type='text'
                     size={inputSize}
                 />
-            </FormControl>
-            <FormControl
+            </MotionFormControl>
+            <MotionFormControl
+                variants={child}
                 isInvalid={!!formState.errors?.name?.message}
-                errortext={formState.errors?.name?.message}
                 isRequired
                 id='name'
+                mb={['0.25em', '0.5em', '0.5em']}
             >
-                <FormLabel>Name</FormLabel>
+                <FormLabel mb={['0','0.25em','0.25em']} fontSize={['sm', 'lg', 'lg']}>Name</FormLabel>
                 <FormErrorMessage>{formState.errors.name?.message}</FormErrorMessage>
                 <Input
                     _focus={{ boxShadow: '0 0 1px 1px #1f1f1f' }}
@@ -93,14 +105,15 @@ const ContactForm = ({
                     type='text'
                     size={inputSize}
                 />
-            </FormControl>
-            <FormControl
+            </MotionFormControl>
+            <MotionFormControl
+                variants={child}
                 isInvalid={!!formState.errors?.email?.message}
-                errortext={formState.errors?.email?.message}
                 isRequired
                 id='email'
+                mb={['0.25em', '0.5em', '0.5em']}
             >
-                <FormLabel>Email</FormLabel>
+                <FormLabel mb={['0','0.25em','0.25em']} fontSize={['sm', 'lg', 'lg']}>Email</FormLabel>
                 <FormErrorMessage>{formState.errors.email?.message}</FormErrorMessage>
                 <Input
                     _focus={{ boxShadow: '0 0 1px 1px #1f1f1f' }}
@@ -110,15 +123,15 @@ const ContactForm = ({
                     type='email'
                     size={inputSize}
                 />
-            </FormControl>
-
-            <FormControl
+            </MotionFormControl>
+            <MotionFormControl
+                variants={child}
                 isInvalid={!!formState.errors?.message?.message}
-                errortext={formState.errors?.message?.message}
                 isRequired
                 id='message'
+                mb={['0.25em', '0.5em', '0.5em']}
             >
-                <FormLabel>Message</FormLabel>
+                <FormLabel mb={['0','0.25em','0.25em']} fontSize={['sm', 'lg', 'lg']}>Message</FormLabel>
                 <FormErrorMessage>{formState.errors.message?.message}</FormErrorMessage>
                 <Textarea
                     rounded='md'
@@ -129,40 +142,43 @@ const ContactForm = ({
                     borderColor='#CCCCCC'
                     {...register('message')}
                     type='text'
-                    mb='0.5em'
                 />
-            </FormControl>
-            <ReCAPTCHA
-                sitekey={`${process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY}`}
-                onChange={completeReCaptcha}
-            />
-            <Button
-                aria-label='Send the contact form'
-                _focus={{
-                    boxShadow: 'none',
-                }}
-                transition='background 0.8s'
-                backgroundPosition='center'
-                _hover={{
-                    bgColor: `#2f2f2f`,
-                    bgGradient: `radial(circle, transparent 1%, #2f2f2f 1%)`,
-                    bgPos: 'center',
-                    backgroundSize: '15000%',
-                }}
-                _active={{
-                    bgColor: `#3f3f3f`,
-                    backgroundSize: '100%',
-                    transition: 'background 0s',
-                }}
-                bg='#1f1f1f'
-                w='100%'
-                color='#f5f5f5'
-                type='submit'
-                my='0.5em'
-                border='1px solid #1f1f1f'
-            >
-                Send
-            </Button>
+            </MotionFormControl>
+            <MotionCenter variants={child}>
+                <ReCAPTCHA
+                    sitekey={`${process.env.NEXT_PUBLIC_RECAPTCHA_SECRET_KEY}`}
+                    onChange={completeReCaptcha}
+                />
+            </MotionCenter>
+            <MotionCenter w='100%' variants={child}>
+                <Button
+                    aria-label='Send the contact form'
+                    _focus={{
+                        boxShadow: 'none',
+                    }}
+                    transition='background 0.8s'
+                    backgroundPosition='center'
+                    _hover={{
+                        bgColor: `#2f2f2f`,
+                        bgGradient: `radial(circle, transparent 1%, #2f2f2f 1%)`,
+                        bgPos: 'center',
+                        backgroundSize: '15000%',
+                    }}
+                    _active={{
+                        bgColor: `#3f3f3f`,
+                        backgroundSize: '100%',
+                        transition: 'background 0s',
+                    }}
+                    bg='#1f1f1f'
+                    w='100%'
+                    color='#f5f5f5'
+                    type='submit'
+                    mt={['0.25em', '0.5em', '0.5em']}
+                    border='1px solid #1f1f1f'
+                >
+                    Send
+                </Button>
+            </MotionCenter>
         </Center>
     )
 }

@@ -15,7 +15,7 @@ const Landing = () => {
             id='landing'
             h='100vh'
             w='100%'
-            pt={['3em', '5em', '5em']}
+            pt={['3em', '3.5em', '3.5em']}
             pb={['3em', '0', '0']}
             position='relative'
         >

@@ -14,38 +14,47 @@ const Footer = () => {
             as='footer'
             aria-label='social links'
             w='100%'
-            position='relative'
+            flexDir='column'
+            justifyContent='space-evenly'
         >
-            <Link href='mailto:genc.serhat97@gmail.com' _focus={{ boxShadow: 'none' }} mx={2}>
-                <FaEnvelope size={iconSize} />
-            </Link>
-            <Link
-                href='https://github.com/SerhatG35'
-                target='_blank'
-                _focus={{ boxShadow: 'none' }}
-                mx={2}
-            >
-                <AiOutlineGithub size={iconSize} />
-            </Link>
-            <Link
-                href='https://www.linkedin.com/in/serhat-genc/'
-                target='_blank'
-                _focus={{ boxShadow: 'none' }}
-                mx={2}
-            >
-                <FaLinkedin size={iconSize} />
-            </Link>
-            <Link
-                href='https://www.instagram.com/serhtgenc/'
-                target='_blank'
-                _focus={{ boxShadow: 'none' }}
-                mx={2}
-            >
-                <RiInstagramFill size={iconSize} />
-            </Link>
-            <Text fontSize='xs' position='absolute' bottom={['0', '1', '1']}>
-                &copy; {new Date().getFullYear()} Serhat Genç
-            </Text>
+            <Center>
+                <Link
+                    href='mailto:genc.serhat97@gmail.com'
+                    _focus={{ boxShadow: 'none' }}
+                    _hover={{ color: '#F2542C' }}
+                    mx={2}
+                >
+                    <FaEnvelope size={iconSize} />
+                </Link>
+                <Link
+                    href='https://github.com/SerhatG35'
+                    target='_blank'
+                    _focus={{ boxShadow: 'none' }}
+                    mx={2}
+                    _hover={{ color: '#F2542C' }}
+                >
+                    <AiOutlineGithub size={iconSize} />
+                </Link>
+                <Link
+                    href='https://www.linkedin.com/in/serhat-genc/'
+                    target='_blank'
+                    _focus={{ boxShadow: 'none' }}
+                    mx={2}
+                    _hover={{ color: '#F2542C' }}
+                >
+                    <FaLinkedin size={iconSize} />
+                </Link>
+                <Link
+                    href='https://www.instagram.com/serhtgenc/'
+                    target='_blank'
+                    _focus={{ boxShadow: 'none' }}
+                    mx={2}
+                    _hover={{ color: '#F2542C' }}
+                >
+                    <RiInstagramFill size={iconSize} />
+                </Link>
+            </Center>
+            <Text fontSize='xs'>&copy; {new Date().getFullYear()} Serhat Genç</Text>
         </Center>
     )
 }

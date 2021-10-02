@@ -1,24 +1,37 @@
-import { Box, Center, Heading, Text } from '@chakra-ui/layout'
+import { Box, Center, Text } from '@chakra-ui/layout'
 import { useAnimation } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import ContactForm from './ContactForm'
 import Footer from './Footer'
-import { MotionCenter } from './MotionComponents'
+import { MotionCenter, MotionHeading } from './MotionComponents'
 
-const variants = {
-    hidden: { y: 100, opacity: 0 },
-    show: { y: 0, opacity: 1, transition: { stiffness: 70, type: 'spring' } },
+const container = {
+    show: {
+        transition: {
+            staggerChildren: 0.15,
+        },
+    },
+}
+
+const child = {
+    hidden: {
+        opacity: 0,
+        x: -100,
+    },
+    show: {
+        opacity: 1,
+        x: 0,
+    },
 }
 
 const Contact = () => {
     const [formSubmitted, setFormSubmitted] = useState(false)
-    const [ref, inView] = useInView({ threshold: 0.6, triggerOnce: true })
+    const [ref, inView] = useInView({ threshold: 0.6 })
     const controls = useAnimation()
 
     useEffect(() => {
-        if (inView) controls.start('show')
-        if (!inView) controls.start('hidden')
+        inView ? controls.start('show') : controls.start('hidden')
     }, [controls, inView])
 
     return (
@@ -28,35 +41,41 @@ const Contact = () => {
             id='contact'
             h='100vh'
             w='100%'
-            pt={['3em', '5em', '5em']}
+            pt={['3em', '3.5em', '3.5em']}
             ref={ref}
         >
             <MotionCenter
                 w='90%'
                 h={['88%', '85%', '85%']}
-                initial='hidden'
-                animate={controls}
-                variants={variants}
                 margin='0 auto'
                 maxW='1200px'
                 flexDir='column'
                 justifyContent='flex-start'
+                initial='hidden'
+                animate={controls}
+                variants={container}
             >
-                <Heading display={['none', 'block', 'block']} as='h1' fontFamily='Nunito' mb='1em'>
+                <MotionHeading
+                    variants={child}
+                    as='h1'
+                    fontFamily='Nunito'
+                    fontSize={['2xl', '4xl', '4xl']}
+                >
                     Contact
-                </Heading>
+                </MotionHeading>
                 <Center w='100%' h='100%' flexDir='column'>
-                    <Center flexDir='column' w={['100%', '50%', '50%']} h='100%'>
-                        <Heading
+                    <Center flexDir='column' w={['100%', '75%', '50%']} h='100%'>
+                        <MotionHeading
+                            variants={child}
                             display={!formSubmitted ? 'block' : 'none'}
-                            fontSize='xl'
+                            fontSize={['lg', 'xl', 'xl']}
                             fontFamily='Nunito'
                             mb={['0', '0.5em', '0.5em']}
                         >
                             Get In Touch
-                        </Heading>
+                        </MotionHeading>
                         {!formSubmitted ? (
-                            <ContactForm setFormSubmitted={setFormSubmitted} />
+                            <ContactForm controls={controls} setFormSubmitted={setFormSubmitted} />
                         ) : (
                             <Center fontSize='xl' alignSelf='center' flexDir='column'>
                                 <Text>Your message has beeen sent.</Text>

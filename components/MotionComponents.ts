@@ -1,4 +1,5 @@
 import { Button, ButtonProps, IconButton, IconButtonProps } from '@chakra-ui/button'
+import { FormControl, FormControlProps } from '@chakra-ui/form-control'
 import {
     Center,
     CenterProps,
@@ -34,3 +35,7 @@ export const MotionButton: React.FC<MotionButtonProps> = motion(Button)
 type MergeGrid<P, T> = Omit<P, keyof T> & T
 type MotionGridProps = MergeGrid<GridProps, HTMLMotionProps<'div'>>
 export const MotionGrid: React.FC<MotionGridProps> = motion(Grid)
+
+type MergeFormControl<P, T> = Omit<P, keyof T> & T
+type MotionFormControlProps = MergeFormControl<FormControlProps, HTMLMotionProps<'div'>>
+export const MotionFormControl: React.FC<MotionFormControlProps> = motion(FormControl)

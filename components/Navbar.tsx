@@ -30,7 +30,6 @@ const Navbar = () => {
             as='nav'
             w='100%'
             borderBottom='1px solid #DBDBDB'
-            py='0.25em'
             position='fixed'
             top='0'
             zIndex='1000'
@@ -39,7 +38,7 @@ const Navbar = () => {
             bg='hsla(0,0%,100%,.6)'
             fontWeight='700'
         >
-            <Box w='90%' margin='0 auto' maxW={['1200px']}>
+            <Center h={['3em', '3.5em', '3.5em']} w='90%' margin='0 auto' maxW={['1200px']}>
                 <MotionCenter
                     initial='hidden'
                     animate='show'
@@ -103,7 +102,7 @@ const Navbar = () => {
                         </ReactScroll>
                     </Center>
                 </MotionCenter>
-            </Box>
+            </Center>
         </Box>
     )
 }
