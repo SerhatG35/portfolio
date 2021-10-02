@@ -27,7 +27,7 @@ const child = {
 
 const Contact = () => {
     const [formSubmitted, setFormSubmitted] = useState(false)
-    const [ref, inView] = useInView({ threshold: 0.6 })
+    const [ref, inView] = useInView({ threshold: 0.6, triggerOnce: true })
     const controls = useAnimation()
 
     useEffect(() => {
