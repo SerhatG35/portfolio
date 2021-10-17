@@ -17,7 +17,9 @@ const Custom404 = () => {
                     display='flex'
                     position='absolute'
                     bottom='5'
-                    _hover={{ textDecoration: 'none', background: '#1f1f1f', color: '#f5f5f5' }}
+                    bg='#1f1f1f'
+                    color='#f5f5f5'
+                    _hover={{ textDecoration: 'none', background: '#2f2f2f' }}
                     _focus={{ outline: 'none' }}
                     fontSize={['md', 'lg', 'xl']}
                     alignItems='center'

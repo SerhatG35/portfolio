@@ -1,13 +1,10 @@
 import { Box, Center } from '@chakra-ui/layout'
-import { useState } from 'react'
 import { BiDownArrow } from 'react-icons/bi'
 import { Link } from 'react-scroll'
 import { ChakraNextImage } from './ChakraNextImage'
 import { MotionCenter, MotionHeading, MotionIconButton } from './MotionComponents'
 
 const Landing = () => {
-    const [isDisabled, setIsDisabled] = useState(false)
-
     return (
         <Box
             as='section'
@@ -69,7 +66,6 @@ const Landing = () => {
                     I&apos;m a passionate Front End Developer and React.js enthusiast.
                 </MotionHeading>
                 <MotionHeading
-                    display={isDisabled ? 'none' : 'block'}
                     initial={{ y: 50, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 1.6, duration: 0.5 }}
@@ -83,14 +79,12 @@ const Landing = () => {
                 <Link
                     style={{
                         cursor: 'pointer',
-                        display: isDisabled ? 'none' : 'flex',
                         marginTop: '1em',
                     }}
                     to='projects'
                     spy={true}
                     smooth={true}
                     duration={500}
-                    onClick={() => setIsDisabled(true)}
                 >
                     <MotionIconButton
                         aria-label='button to navigate projects section'
