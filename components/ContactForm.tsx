@@ -28,8 +28,9 @@ const child = {
 const ContactForm = () => {
   const inputSize = useBreakpointValue({ base: "xs", sm: "md" });
   const [captchaFilled, setCaptchaFilled] = useState(false);
+  const [isFormSended, setIsFormSended] = useState(false);
   const {
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
     handleSubmit,
     control,
   } = useForm<ContactInputTypes>({
@@ -51,6 +52,7 @@ const ContactForm = () => {
         "user_EYPXtlwIrekVAS0q2FIMR"
       )
         .then(() => {
+          setIsFormSended(true);
           Toaster("Success", "Your email has been sent", "success");
         })
         .catch(() => {
@@ -76,7 +78,7 @@ const ContactForm = () => {
       id="contact-form"
       onSubmit={handleSubmit(sendEmail)}
     >
-      {!isSubmitSuccessful ? (
+      {!isFormSended ? (
         <>
           <Controller
             name="subject"
