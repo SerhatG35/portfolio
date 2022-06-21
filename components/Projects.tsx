@@ -5,6 +5,7 @@ import { useAnimation } from 'framer-motion'
 import { GithubRepoTypes } from 'global'
 import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
+import { Toaster } from 'utils/Toaster'
 import { MotionGrid } from './MotionComponents'
 import Project from './Project'
 
@@ -30,8 +31,8 @@ const Projects = () => {
                 return Number(new Date(b.created_at)) - Number(new Date(a.created_at))
             })
             setRepos(data)
-        } catch (error) {
-            console.log(error)
+        } catch (error:any) {
+           Toaster("",`${error?.response?.data}`,"error")
         }
     }
 

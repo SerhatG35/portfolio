@@ -1,18 +1,19 @@
 .active {
-    opacity: 1 !important;
+  opacity: 1 !important;
 }
 ::-webkit-scrollbar {
-    width: 18px;
+  width: 16px;
 }
 
 ::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background: #f5f5f5;
+  background: #f5f5f5;
 }
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    border-left: 4px solid #f5f5f5;
-    border-right: 4px solid #f5f5f5;
-    background: #1f1f1f;
+  border-radius: 8px;
+  border-left: 3px solid #f5f5f5;
+  border-right: 3px solid #f5f5f5;
+  border-top: 3px solid #f5f5f5;
+  border-bottom: 3px solid #f5f5f5;
+  background-image: linear-gradient(to top, #542cf2, #f2542c);
 }
