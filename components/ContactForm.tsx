@@ -28,9 +28,8 @@ const child = {
 const ContactForm = () => {
     const inputSize = useBreakpointValue({ base: 'xs', sm: 'md' })
     const [captchaFilled, setCaptchaFilled] = useState(false)
-    const [isFormSended, setIsFormSended] = useState(false)
     const {
-        formState: { errors },
+        formState: { errors, isSubmitting, isSubmitSuccessful },
         handleSubmit,
         control,
     } = useForm<ContactInputTypes>({
@@ -46,13 +45,12 @@ const ContactForm = () => {
     const sendEmail = () => {
         if (captchaFilled) {
             sendForm(
-                'service_pjtiisg',
+                `${process.env.NEXT_PUBLIC_EMAIL_SERVICE_ID}`,
                 'template_04nqstq',
                 '#contact-form',
                 'user_EYPXtlwIrekVAS0q2FIMR'
             )
                 .then(() => {
-                    setIsFormSended(true)
                     Toaster('Success', 'Your email has been sent', 'success')
                 })
                 .catch(() => {
@@ -74,7 +72,7 @@ const ContactForm = () => {
             id='contact-form'
             onSubmit={handleSubmit(sendEmail)}
         >
-            {!isFormSended ? (
+            {!isSubmitSuccessful ? (
                 <>
                     <Controller
                         name='subject'
@@ -197,6 +195,7 @@ const ContactForm = () => {
                     </MotionCenter>
                     <MotionCenter w='100%' variants={child}>
                         <Button
+                            isLoading={isSubmitting}
                             aria-label='Send the contact form'
                             _focus={{
                                 boxShadow: 'none',
