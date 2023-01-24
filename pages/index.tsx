@@ -1,3 +1,4 @@
+import Blogs from 'components/Blogs'
 import Contact from 'components/Contact'
 import Landing from 'components/Landing'
 import Projects from 'components/Projects'
@@ -11,6 +12,7 @@ export default function Home() {
             </Head>
             <Landing />
             <Projects />
+            <Blogs />
             <Contact />
         </>
     )

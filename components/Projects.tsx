@@ -31,8 +31,8 @@ const Projects = () => {
                 return Number(new Date(b.created_at)) - Number(new Date(a.created_at))
             })
             setRepos(data)
-        } catch (error:any) {
-           Toaster("",`${error?.response?.data}`,"error")
+        } catch (error: any) {
+            Toaster('', `${error?.response?.data}`, 'error')
         }
     }
 
@@ -66,7 +66,7 @@ const Projects = () => {
                     animate={controls}
                     variants={container}
                 >
-                    {repos?.map(repo => {
+                    {repos?.map((repo) => {
                         if (repoList.includes(repo.name))
                             return (
                                 <Project key={repo.id} homepage={repo.homepage} name={repo.name} />
