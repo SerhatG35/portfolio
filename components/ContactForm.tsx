@@ -48,7 +48,7 @@ const ContactForm = () => {
                 `${process.env.NEXT_PUBLIC_EMAIL_SERVICE_ID}`,
                 'template_04nqstq',
                 '#contact-form',
-                'user_EYPXtlwIrekVAS0q2FIMR'
+                `${process.env.NEXT_PUBLIC_USER_ID}`
             )
                 .then(() => {
                     Toaster('Success', 'Your email has been sent', 'success')
