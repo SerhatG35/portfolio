@@ -46,7 +46,7 @@ const ContactForm = () => {
         if (captchaFilled) {
             sendForm(
                 `${process.env.NEXT_PUBLIC_EMAIL_SERVICE_ID}`,
-                'template_04nqstq',
+                `${process.env.NEXT_PUBLIC_TEMPLATE_ID}`,
                 '#contact-form',
                 `${process.env.NEXT_PUBLIC_USER_ID}`
             )
