@@ -1,4 +1,5 @@
 export const repoList = [
+    'e-commerce-app',
     'flip-question-card',
     'meal-factory',
     'micro-frontend-project',

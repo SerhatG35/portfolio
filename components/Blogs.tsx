@@ -19,11 +19,15 @@ const container: Variants = {
 const child: Variants = {
     hidden: {
         opacity: 0,
-        x: -50,
+        x: -250,
     },
     show: {
         opacity: 1,
         x: 0,
+        transition: {
+            delay: 0.2,
+            duration: 0.25,
+        },
     },
 }
 
@@ -82,7 +86,7 @@ const Blogs = () => {
                 >
                     Blogs
                 </MotionHeading>
-                <Center flexDir='column'>
+                <Center h='100%' flexDir='column'>
                     {blogs?.map((blog) => (
                         <Blog blog={blog} key={blog.id} />
                     ))}

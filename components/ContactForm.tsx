@@ -196,29 +196,19 @@ const ContactForm = () => {
                     <MotionCenter w='100%' variants={child}>
                         <Button
                             isLoading={isSubmitting}
-                            aria-label='Send the contact form'
-                            _focus={{
-                                boxShadow: 'none',
-                            }}
-                            transition='background 0.8s'
-                            backgroundPosition='center'
-                            _hover={{
-                                bgColor: `#2f2f2f`,
-                                bgGradient: `radial(circle, transparent 1%, #2f2f2f 1%)`,
-                                bgPos: 'center',
-                                backgroundSize: '15000%',
-                            }}
-                            _active={{
-                                bgColor: `#3f3f3f`,
-                                backgroundSize: '100%',
-                                transition: 'background 0s',
-                            }}
-                            bg='#1f1f1f'
-                            w='100%'
-                            color='#f5f5f5'
-                            type='submit'
                             mt={['0.25em', '0.5em', '0.5em']}
-                            border='1px solid #1f1f1f'
+                            type='submit'
+                            aria-label='Send the contact form'
+                            border='7px solid #494949'
+                            borderTopWidth='3px'
+                            _hover={{ background: '#565656f8' }}
+                            bg='#565656'
+                            color='#fff'
+                            w='100%'
+                            h='35px'
+                            _active={{
+                                transform: 'scale(0.98)',
+                            }}
                         >
                             Send
                         </Button>

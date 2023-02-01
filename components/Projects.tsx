@@ -1,18 +1,33 @@
-import { Box, Center, Heading } from '@chakra-ui/layout'
+import { Box } from '@chakra-ui/layout'
 import axios from 'axios'
 import { repoList } from 'constants/RepoList'
-import { useAnimation } from 'framer-motion'
+import { useAnimation, Variants } from 'framer-motion'
 import { GithubRepoTypes } from 'global'
 import { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { Toaster } from 'utils/Toaster'
-import { MotionGrid } from './MotionComponents'
+import { MotionCenter, MotionGrid, MotionHeading } from './MotionComponents'
 import Project from './Project'
 
-const container = {
+const container: Variants = {
     show: {
         transition: {
             staggerChildren: 0.15,
+        },
+    },
+}
+
+const child: Variants = {
+    hidden: {
+        opacity: 0,
+        x: -250,
+    },
+    show: {
+        opacity: 1,
+        x: 0,
+        transition: {
+            delay: 0.2,
+            duration: 0.25,
         },
     },
 }
@@ -54,10 +69,25 @@ const Projects = () => {
             py={['3em', '3.5em', '3.5em']}
             ref={ref}
         >
-            <Center h='100%' w='90%' margin='0 auto' maxW='1200px' flexDir='column'>
-                <Heading fontSize={['2xl', '4xl', '4xl']} fontFamily='Nunito' mb='1em'>
+            <MotionCenter
+                initial='hidden'
+                animate={controls}
+                variants={container}
+                h='100%'
+                w='90%'
+                margin='0 auto'
+                maxW='1200px'
+                flexDir='column'
+            >
+                <MotionHeading
+                    variants={child}
+                    as='h1'
+                    fontSize={['2xl', '4xl', '4xl']}
+                    fontFamily='Nunito'
+                    mb='1em'
+                >
                     Projects
-                </Heading>
+                </MotionHeading>
                 <MotionGrid
                     h='100%'
                     templateColumns={['repeat(1,1fr)', 'repeat(1,1fr)', 'repeat(2, 1fr)']}
@@ -73,7 +103,7 @@ const Projects = () => {
                             )
                     })}
                 </MotionGrid>
-            </Center>
+            </MotionCenter>
         </Box>
     )
 }

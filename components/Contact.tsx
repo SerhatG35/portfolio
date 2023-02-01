@@ -1,5 +1,5 @@
 import { Box, Center } from '@chakra-ui/layout'
-import { useAnimation } from 'framer-motion'
+import { useAnimation, Variants } from 'framer-motion'
 import { useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 import ContactForm from './ContactForm'
@@ -14,14 +14,18 @@ const container = {
     },
 }
 
-const child = {
+const child: Variants = {
     hidden: {
         opacity: 0,
-        x: -100,
+        x: -250,
     },
     show: {
         opacity: 1,
         x: 0,
+        transition: {
+            delay: 0.2,
+            duration: 0.25,
+        },
     },
 }
 

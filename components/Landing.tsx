@@ -1,10 +1,15 @@
-import { Box, Center } from '@chakra-ui/layout'
+import { Box, Center, Mark, useHighlight } from '@chakra-ui/layout'
 import { BiDownArrow } from 'react-icons/bi'
 import { Link } from 'react-scroll'
 import { ChakraNextImage } from './ChakraNextImage'
 import { MotionCenter, MotionHeading, MotionIconButton } from './MotionComponents'
 
 const Landing = () => {
+    const chunks = useHighlight({
+        text: "I'm a passionate Front End developer and React.js enthusiast.",
+        query: ['Front End', 'React.js'],
+    })
+
     return (
         <Box
             as='section'
@@ -52,7 +57,7 @@ const Landing = () => {
                     as='h1'
                     fontSize='clamp(1rem,7vw,3rem)'
                 >
-                    Hello, my name is Serhat,
+                    Hello, my name is Serhat 👋
                 </MotionHeading>
                 <MotionHeading
                     initial={{ y: 50, opacity: 0 }}
@@ -62,47 +67,75 @@ const Landing = () => {
                     fontWeight='400'
                     fontSize='clamp(0.5rem,7vw,2rem)'
                     color='#5f5f5f'
+                    lineHeight='base'
                 >
-                    I&apos;m a passionate Front End Developer and React.js enthusiast.
+                    {chunks.map(({ match, text }, index) => {
+                        if (!match) return text
+                        if (text === 'Front End')
+                            return (
+                                <Mark
+                                    key={`${text}${index}`}
+                                    bg='#DAD2FC'
+                                    rounded='6px'
+                                    color='inherit'
+                                    px='2'
+                                >
+                                    {text}
+                                </Mark>
+                            )
+                        return (
+                            <Mark
+                                key={`${text}${index}`}
+                                bg='#FCDAD2'
+                                rounded='6px'
+                                color='inherit'
+                                px='2'
+                            >
+                                {text}
+                            </Mark>
+                        )
+                    })}
                 </MotionHeading>
-                <MotionHeading
-                    initial={{ y: 50, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 1.6, duration: 0.5 }}
-                    fontFamily='Nunito'
-                    fontWeight='400'
-                    fontSize='clamp(1rem,5vw,1rem)'
-                    color='#3f3f3f'
-                >
-                    Click the button below to see my latest projects.
-                </MotionHeading>
-                <Link
-                    style={{
-                        cursor: 'pointer',
-                        marginTop: '1em',
-                    }}
-                    to='projects'
-                    spy={true}
-                    smooth={true}
-                    duration={500}
-                >
-                    <MotionIconButton
-                        aria-label='button to navigate projects section'
-                        animate={{ y: -20, opacity: 1 }}
-                        transition={{
-                            delay: 1.6,
-                            repeat: Infinity,
-                            repeatType: 'reverse',
-                            duration: 0.5,
+                <Center flexDir='column'>
+                    <MotionHeading
+                        initial={{ y: 50, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 1.6, duration: 0.5 }}
+                        fontFamily='Nunito'
+                        fontWeight='400'
+                        fontSize='clamp(1rem,5vw,1rem)'
+                        color='#3f3f3f'
+                    >
+                        Click the button below to see my latest projects.
+                    </MotionHeading>
+                    <Link
+                        style={{
+                            cursor: 'pointer',
+                            marginTop: '1em',
                         }}
-                        initial={{ opacity: 0 }}
-                        bg='transparent'
-                        _focus={{ boxShadow: 'none' }}
-                        _active={{ background: 'transparent' }}
-                        _hover={{ background: 'transparent' }}
-                        icon={<BiDownArrow size={28} />}
-                    />
-                </Link>
+                        to='projects'
+                        spy={true}
+                        smooth={true}
+                        duration={500}
+                    >
+                        <MotionIconButton
+                            aria-label='button to navigate projects section'
+                            animate={{ y: -20, opacity: 1 }}
+                            transition={{
+                                delay: 1.6,
+                                repeat: Infinity,
+                                repeatType: 'reverse',
+                                duration: 0.5,
+                            }}
+                            initial={{ opacity: 0 }}
+                            bg='transparent'
+                            _focus={{ boxShadow: 'none' }}
+                            _active={{ background: 'transparent' }}
+                            _hover={{ background: 'transparent' }}
+                            icon={<BiDownArrow size={28} />}
+                        />
+                    </Link>
+                </Center>
             </Center>
         </Box>
     )
